@@ -1,5 +1,5 @@
 name: appep
-description: "A new Flutter project."
+description: "Aplicacion de control de entrenamiento fisico"
 
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
@@ -13,16 +13,23 @@ dependencies:
   flutter:
     sdk: flutter
 
-
   cupertino_icons: ^1.0.8
   get: ^4.6.6
   hexcolor: ^3.0.1
   google_fonts: ^6.2.1
+  syncfusion_flutter_charts: ^27.1.57
+  flutter_launcher_icons: ^0.14.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/icons/ep.png" 
+  adaptive_icon_background: "#FFFFFF" 
+    
 
   flutter_lints: ^4.0.0
 
@@ -32,6 +39,7 @@ flutter:
 
   assets:
     - assets/images/
+    - assets/icons/
     - assets/apps/
 
 

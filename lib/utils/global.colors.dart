@@ -6,4 +6,5 @@ class GlobalColors {
   static HexColor whiteColor = HexColor('#FFFFFF');
   static HexColor succesColor = HexColor('#80BF4F');
   static HexColor darkcolor = HexColor('#333C48');
+  static HexColor orangecolor = HexColor('#EF700F');
 }
