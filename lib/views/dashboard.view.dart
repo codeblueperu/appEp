@@ -12,6 +12,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 class DashboardView extends StatelessWidget {
+  //final String username;
   const DashboardView({super.key});
 
   @override
@@ -49,7 +50,7 @@ class DashboardView extends StatelessWidget {
                                       width: 8,
                                     ),
                                     Text(
-                                      'Bienvenido, Diego',
+                                      'Bienvenido',
                                       style: GoogleFonts.quicksand(
                                           fontWeight: FontWeight.w500,
                                           fontSize: 18,
@@ -341,23 +342,23 @@ class DashboardView extends StatelessWidget {
                             CardLineInfoView(
                                 iconColor: HexColor('#EF700F'),
                                 titulo: '12km',
-                                subtitulo: '12 octubre de 2024',
+                                subtitulo: 'Carrera - 12 octubre de 2024',
                                 iconItem: Icons.bolt),
                             const SizedBox(
                               height: 10,
                             ),
                             CardLineInfoView(
                                 iconColor: GlobalColors.succesColor,
-                                titulo: '9.6km',
-                                subtitulo: '29 agosto de 2024',
+                                titulo: '58',
+                                subtitulo: 'Abdominales - 29 agosto de 2024',
                                 iconItem: Icons.data_exploration),
                             const SizedBox(
                               height: 10,
                             ),
                             CardLineInfoView(
                               iconColor: HexColor('#3ED1FF'),
-                              titulo: '6.9km',
-                              subtitulo: '23 junio de 2024',
+                              titulo: '51',
+                              subtitulo: 'Planchas - 23 junio de 2024',
                               iconItem: Icons.donut_small,
                             ),
                             const SizedBox(
@@ -365,8 +366,8 @@ class DashboardView extends StatelessWidget {
                             ),
                             CardLineInfoView(
                               iconColor: GlobalColors.warningColor,
-                              titulo: '3.7km',
-                              subtitulo: '12 mayo de 2024',
+                              titulo: '10',
+                              subtitulo: 'Barras - 12 mayo de 2024',
                               iconItem: Icons.merge_sharp,
                             ),
                           ],

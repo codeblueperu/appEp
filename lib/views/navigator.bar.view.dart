@@ -2,6 +2,7 @@ import 'package:appep/utils/global.colors.dart';
 import 'package:appep/views/dashboard.view.dart';
 import 'package:appep/views/login.view.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class NavigatorBarView extends StatefulWidget {
   const NavigatorBarView({
@@ -25,16 +26,20 @@ class _NavigatorBarViewState extends State<NavigatorBarView> {
         MaterialPageRoute(builder: (context) => const DashboardView()),
       );
     } else if (index == 1) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const DashboardView()),
-      );
+      _logout();
     } else if (index == 2) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const LoginView()),
-      );
+      _logout();
     }
+  }
+
+  Future<void> _logout() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.remove('email');
+
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => LoginView()),
+    );
   }
 
   @override
@@ -50,10 +55,10 @@ class _NavigatorBarViewState extends State<NavigatorBarView> {
           icon: Icon(Icons.home),
           label: 'Dashboard',
         ),
-        BottomNavigationBarItem(
+        /* BottomNavigationBarItem(
           icon: Icon(Icons.person),
-          label: 'Mi Perfil',
-        ),
+          label: '',
+        ), */
         BottomNavigationBarItem(
           icon: Icon(Icons.logout_rounded),
           label: 'Salir',

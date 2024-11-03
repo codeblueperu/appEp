@@ -19,16 +19,18 @@ dependencies:
   google_fonts: ^6.2.1
   syncfusion_flutter_charts: ^27.1.57
   flutter_launcher_icons: ^0.14.1
+  shared_preferences: ^2.3.2
+  percent_indicator: ^4.2.3 
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-flutter_icons:
+flutter_launcher_icons:
   android: true
   ios: true
-  image_path: "assets/icons/ep.png" 
-  adaptive_icon_background: "#FFFFFF" 
+  image_path: "assets/icon/iconoep.jpg" 
+  remove_alpha_ios: true
     
 
   flutter_lints: ^4.0.0
@@ -39,7 +41,7 @@ flutter:
 
   assets:
     - assets/images/
-    - assets/icons/
+    - assets/icon/
     - assets/apps/
 
 

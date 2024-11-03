@@ -1,8 +1,9 @@
+import 'package:appep/data/usuarios.dart';
 import 'package:appep/utils/global.colors.dart';
 import 'package:appep/views/dashboard.view.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -14,6 +15,58 @@ class LoginView extends StatefulWidget {
 class _LoginViewState extends State<LoginView> {
   bool isChecked = false;
   bool isVisbled = false;
+  final _usernameController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final List<Usuario> dtLista = [
+    Usuario(username: '120356800', password: '120804700'),
+    Usuario(username: '120804700', password: '120804700'),
+    Usuario(username: '335983200', password: '335983200'),
+  ];
+
+  @override
+  void initState() {
+    super.initState();
+    _clearSharedPreferences(); 
+  }
+
+  Future<void> _clearSharedPreferences() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.clear();
+  }
+
+  Usuario? _getUsuario(String username, String password) {
+    return dtLista.firstWhere((usuario) =>
+        usuario.username == username && usuario.password == password);
+  }
+
+  Future<void> _login() async {
+    final username = _usernameController.text;
+    final password = _passwordController.text;
+
+    bool isValid = dtLista.any((usuario) =>
+        usuario.username == username && usuario.password == password);
+
+    if (username == "" || password == "") {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Ingrese un usuario y contraseña')),
+      );
+    } else if (username != "" && password != "" && isValid) {
+      Usuario? dbuser = _getUsuario(username,password);
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.setString('email', dbuser!.password);
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+            builder: (context) =>
+                DashboardView()),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('El usuario y/ó contraseña son incorrectos')),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,6 +125,7 @@ class _LoginViewState extends State<LoginView> {
                           color: Colors.black.withOpacity(0.1), blurRadius: 7)
                     ]),
                 child: TextFormField(
+                  controller: _usernameController,
                   keyboardType: TextInputType.text,
                   cursorColor: GlobalColors.succesColor,
                   style: GoogleFonts.quicksand(
@@ -106,6 +160,7 @@ class _LoginViewState extends State<LoginView> {
                           color: Colors.black.withOpacity(0.1), blurRadius: 7)
                     ]),
                 child: TextFormField(
+                  controller: _passwordController,
                   keyboardType: TextInputType.text,
                   obscureText: true,
                   cursorColor: GlobalColors.succesColor,
@@ -118,13 +173,10 @@ class _LoginViewState extends State<LoginView> {
                       fontWeight: FontWeight.bold,
                     ),
                     labelText: "Contraseña",
-                    // Icono a la izquierda
                     prefixIcon: const Icon(Icons.password),
                     prefixIconColor: GlobalColors.succesColor,
-                    // Icono a la derecha
-                    suffixIcon: Icon(                      
-                      Icons
-                          .visibility, // Puedes cambiar el icono según prefieras
+                    suffixIcon: Icon(
+                      Icons.visibility,
                       color: GlobalColors.succesColor,
                     ),
                     fillColor: GlobalColors.succesColor,
@@ -142,7 +194,9 @@ class _LoginViewState extends State<LoginView> {
               ),
               Row(
                 children: [
-                  const SizedBox(width: 19,),
+                  const SizedBox(
+                    width: 19,
+                  ),
                   Checkbox(
                     value: isChecked,
                     onChanged: (bool? value) {
@@ -150,7 +204,8 @@ class _LoginViewState extends State<LoginView> {
                         isChecked = value ?? false;
                       });
                     },
-                    activeColor: GlobalColors.succesColor, // Cambia el color si lo deseas
+                    activeColor: GlobalColors
+                        .succesColor, // Cambia el color si lo deseas
                   ),
                   Text("Recordar credenciales",
                       style: GoogleFonts.quicksand(
@@ -161,9 +216,7 @@ class _LoginViewState extends State<LoginView> {
                 height: 35,
               ),
               MaterialButton(
-                onPressed: () {
-                  Get.to(const DashboardView());
-                },
+                onPressed: _login,
                 shape: RoundedRectangleBorder(
                   borderRadius:
                       BorderRadius.circular(15), // Bordes redondeados de 15px

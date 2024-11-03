@@ -1,6 +1,7 @@
 import 'package:appep/utils/global.colors.dart';
 import 'package:appep/views/card.line.info.view.dart';
 import 'package:appep/views/dashboard.view.dart';
+import 'package:appep/views/screen/components/planchas.run.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -18,9 +19,9 @@ class PlanchasViewComponent extends StatelessWidget {
       _SalesData('Trim III', 55)
     ];
     return Scaffold(
-        backgroundColor: GlobalColors.warningColor,
-        body: SafeArea(
-            child: SingleChildScrollView(
+      backgroundColor: GlobalColors.warningColor,
+      body: SafeArea(
+        child: SingleChildScrollView(
           child: ConstrainedBox(
             constraints: BoxConstraints(
               minHeight: MediaQuery.of(context).size.height,
@@ -186,7 +187,19 @@ class PlanchasViewComponent extends StatelessWidget {
               ),
             ),
           ),
-        )));
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Get.to(PlanchasRunScreen());
+        },
+        child: Icon(
+          Icons.more_time,
+          color: GlobalColors.warningColor,
+        ),
+        backgroundColor: GlobalColors.backgroundColor,
+      ),
+    );
   }
 }
 
